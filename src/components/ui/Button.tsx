@@ -1,0 +1,20 @@
+import type { ButtonHTMLAttributes } from 'react'
+import { cn } from '@/lib/cn'
+
+type Variant = 'primary' | 'secondary'
+
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: Variant
+}
+
+const BASE =
+  'inline-flex min-h-11 items-center justify-center gap-2 rounded-lg px-4 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-60'
+
+const VARIANTS: Record<Variant, string> = {
+  primary: 'bg-primary text-primary-fg hover:opacity-90',
+  secondary: 'border border-line bg-surface text-fg hover:bg-sunken',
+}
+
+export function Button({ variant = 'primary', className, type = 'button', ...props }: ButtonProps) {
+  return <button type={type} className={cn(BASE, VARIANTS[variant], className)} {...props} />
+}

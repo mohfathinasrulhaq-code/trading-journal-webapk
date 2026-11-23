@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+/* Dark mode berbasis class `.dark` pada <html> (diatur oleh ThemeProvider). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Token warna: nilai asli ada di variabel --tj-*, berganti sesuai tema. */
+:root {
+  --tj-app: #f4f6f5;
+  --tj-surface: #ffffff;
+  --tj-sunken: #e9edf0;
+  --tj-line: #d9dfe4;
+  --tj-fg: #101828;
+  --tj-muted: #566275;
+  --tj-primary: #2f45b5;
+  --tj-primary-fg: #ffffff;
+  --tj-primary-soft: #e6e9fb;
+  --tj-profit: #157a45;
+  --tj-loss: #b42318;
+  --tj-warning: #9a5b00;
+}
+
+.dark {
+  --tj-app: #0d1320;
+  --tj-surface: #141b2b;
+  --tj-sunken: #1b2336;
+  --tj-line: #26304a;
+  --tj-fg: #e8ecf5;
+  --tj-muted: #9ba6bd;
+  --tj-primary: #93a5ff;
+  --tj-primary-fg: #0d1320;
+  --tj-primary-soft: #1e2749;
+  --tj-profit: #46c37b;
+  --tj-loss: #f97066;
+  --tj-warning: #f5b544;
+}
+
+/* Menjadikan token tersedia sebagai utility: bg-app, bg-surface, text-fg, border-line, dst. */
+@theme inline {
+  --color-app: var(--tj-app);
+  --color-surface: var(--tj-surface);
+  --color-sunken: var(--tj-sunken);
+  --color-line: var(--tj-line);
+  --color-fg: var(--tj-fg);
+  --color-muted: var(--tj-muted);
+  --color-primary: var(--tj-primary);
+  --color-primary-fg: var(--tj-primary-fg);
+  --color-primary-soft: var(--tj-primary-soft);
+  --color-profit: var(--tj-profit);
+  --color-loss: var(--tj-loss);
+  --color-warning: var(--tj-warning);
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--tj-app);
+    color: var(--tj-fg);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--tj-primary);
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
